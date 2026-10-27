@@ -1,0 +1,435 @@
+/* ============================================
+   تصميم صفحة "نأجل الامتحان ولا لأ؟"
+   Modern Funny UI - RTL Support
+   ============================================ */
+
+/* --- إعدادات عامة --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    direction: rtl;
+    position: relative;
+    touch-action: manipulation;
+}
+
+/* --- أنيميشن الخلفية --- */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- الأشكال العائمة في الخلفية --- */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.floating-shapes {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.shape {
+    position: absolute;
+    font-size: 2.5rem;
+    opacity: 0.15;
+    animation: float 20s infinite ease-in-out;
+}
+
+.shape-1 { top: 10%; right: 10%; animation-delay: 0s; }
+.shape-2 { top: 20%; left: 15%; animation-delay: -3s; }
+.shape-3 { top: 60%; right: 20%; animation-delay: -6s; }
+.shape-4 { top: 70%; left: 10%; animation-delay: -9s; }
+.shape-5 { top: 40%; right: 50%; animation-delay: -12s; }
+.shape-6 { top: 80%; left: 40%; animation-delay: -15s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-30px) rotate(90deg); }
+    50% { transform: translateY(-10px) rotate(180deg); }
+    75% { transform: translateY(-40px) rotate(270deg); }
+}
+
+/* --- الحاوية الرئيسية --- */
+.container {
+    position: relative;
+    z-index: 10;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* --- صندوق السؤال --- */
+.question-box {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.question {
+    font-size: clamp(1.8rem, 6vw, 3.5rem);
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 
+        3px 3px 0 rgba(0,0,0,0.2),
+        -1px -1px 0 rgba(255,255,255,0.1);
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.question-icon {
+    display: inline-block;
+    animation: wobble 2s ease-in-out infinite;
+}
+
+@keyframes wobble {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+.subtitle {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: rgba(255,255,255,0.9);
+    font-weight: 500;
+}
+
+/* --- حاوية الأزرار --- */
+.buttons-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- الأزرار الأساسية --- */
+.btn {
+    position: relative;
+    min-width: 140px;
+    min-height: 70px;
+    padding: 18px 40px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: inherit;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    outline: none;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* --- زر "آه" الأخضر --- */
+.btn-yes {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    z-index: 100;
+}
+
+.btn-yes:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(17, 153, 142, 0.5);
+}
+
+.btn-yes.fleeing {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* --- زر "لا" الأحمر --- */
+.btn-no {
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.btn-no:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(235, 51, 73, 0.5);
+}
+
+.btn-icon {
+    font-size: 1.3rem;
+}
+
+/* --- عداد المحاولات --- */
+.attempt-counter {
+    margin-top: 40px;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.8);
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.attempt-counter.visible {
+    opacity: 1;
+}
+
+.attempt-counter span {
+    color: #ffd700;
+    font-size: 1.3rem;
+    font-weight: 900;
+}
+
+/* --- الرسائل الساخرة --- */
+.message-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 200;
+}
+
+.sarcastic-message {
+    position: absolute;
+    padding: 12px 20px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+    max-width: 280px;
+    text-align: center;
+    animation: messageAppear 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards,
+               messageFloat 3s ease-in-out 0.5s infinite;
+    opacity: 0;
+}
+
+.sarcastic-message::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 30px;
+    border: 10px solid transparent;
+    border-top-color: #fff;
+    border-right-color: #fff;
+}
+
+.sarcastic-message::after {
+    content: '💬';
+    position: absolute;
+    top: -15px;
+    left: -10px;
+    font-size: 1.5rem;
+}
+
+@keyframes messageAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(-10deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes messageFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.sarcastic-message.disappearing {
+    animation: messageDisappear 0.4s ease-in forwards;
+}
+
+@keyframes messageDisappear {
+    to {
+        opacity: 0;
+        transform: scale(0.5) translateY(20px);
+    }
+}
+
+/* --- الرسالة النهائية --- */
+.final-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+.final-message.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.final-content {
+    text-align: center;
+    padding: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 30px;
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255,255,255,0.2);
+    max-width: 90%;
+    animation: finalPop 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s both;
+}
+
+@keyframes finalPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(-5deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.celebration {
+    font-size: 4rem;
+    animation: celebrate 1s ease-in-out infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes celebrate {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.2) rotate(-10deg); }
+    75% { transform: scale(1.2) rotate(10deg); }
+}
+
+.final-title {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    color: #fff;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+}
+
+.final-text {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: rgba(255,255,255,0.95);
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.final-emoji {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 2rem;
+}
+
+.final-emoji span {
+    display: inline-block;
+    animation: bounce 1.5s ease-in-out infinite;
+}
+
+.final-emoji span:nth-child(1) { animation-delay: 0s; }
+.final-emoji span:nth-child(2) { animation-delay: 0.1s; }
+.final-emoji span:nth-child(3) { animation-delay: 0.2s; }
+.final-emoji span:nth-child(4) { animation-delay: 0.3s; }
+.final-emoji span:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- استجابة الشاشات الصغيرة --- */
+@media (max-width: 480px) {
+    .buttons-container {
+        gap: 20px;
+    }
+
+    .btn {
+        min-width: 120px;
+        min-height: 60px;
+        padding: 15px 30px;
+        font-size: 1.3rem;
+    }
+
+    .question-box {
+        margin-bottom: 40px;
+    }
+
+    .sarcastic-message {
+        font-size: 0.9rem;
+        max-width: 220px;
+        padding: 10px 16px;
+    }
+}
+
+@media (max-width: 360px) {
+    .btn {
+        min-width: 100px;
+        padding: 12px 25px;
+        font-size: 1.1rem;
+    }
+}
+
+/* --- دعم تقليل الحركة --- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
